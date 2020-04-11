@@ -19,8 +19,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/todo', function () {
-    return "このページはアプリケーションのページです";
+Route::group(["middleware"=>"auth"],function(){
+    Route::get('/todo',TodoController::class . "@index");
 });
